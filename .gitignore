@@ -1,6 +1,7 @@
-.direnv
+.venv
 __pycache__
 .coverage
 .pytest_cache
 *.egg-info
 version.py
+build
