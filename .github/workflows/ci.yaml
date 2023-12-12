@@ -32,7 +32,7 @@ jobs:
     with:
       package-name: ipytoolbox
       package-index-name: TestPyPI
-      package-index-url: https://test.pypi.org/legacy
+      package-index-url: https://test.pypi.org/legacy/
     secrets:
       password: ${{ secrets.TEST_PYPI_API_TOKEN }}
 
