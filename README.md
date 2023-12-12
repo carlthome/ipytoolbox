@@ -1,4 +1,4 @@
-# autocuda
+# ipytoolbox
 
 TODO
 
@@ -7,14 +7,14 @@ TODO
 First make sure Python is installed, then run:
 
 ```sh
-pip install autocuda
+pip install ipytoolbox
 ```
 
 Then you can use it in IPython or Jupyter Notebooks by
 
 ```ipython
-%load_ext autocuda
-%autocuda
+%load_ext ipytoolbox
+%ipytoolbox
 ```
 
 Check that it worked by

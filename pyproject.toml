@@ -3,7 +3,7 @@ requires = ["setuptools>=61", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "autocuda"
+name = "ipytoolbox"
 authors = [{ name = "Carl Thomé", email = "carlthome@gmail.com" }]
 description = "TODO"
 readme = "README.md"
@@ -16,11 +16,11 @@ dynamic = ["version"]
 tests = ["pytest", "pytest-cov"]
 
 [project.urls]
-Homepage = "https://github.com/carlthome/autocuda"
-Bugs = "https://github.com/carlthome/autocuda/issues"
+Homepage = "https://github.com/carlthome/ipytoolbox"
+Bugs = "https://github.com/carlthome/ipytoolbox/issues"
 
 [tool.setuptools_scm]
-write_to = "autocuda/version.py"
+write_to = "ipytoolbox/version.py"
 local_scheme = "no-local-version"
 
 [tool.black]
