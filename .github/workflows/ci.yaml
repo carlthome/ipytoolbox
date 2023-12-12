@@ -33,6 +33,7 @@ jobs:
       package-name: ipytoolbox
       package-index-name: TestPyPI
       package-index-url: https://test.pypi.org
+      package-index-upload-url: https://test.pypi.org/legacy/
     secrets:
       password: ${{ secrets.TEST_PYPI_API_TOKEN }}
 
@@ -43,5 +44,6 @@ jobs:
       package-name: ipytoolbox
       package-index-name: PyPI
       package-index-url: https://pypi.org
+      package-index-upload-url: https://upload.pypi.org/legacy/
     secrets:
       password: ${{ secrets.PYPI_API_TOKEN }}
