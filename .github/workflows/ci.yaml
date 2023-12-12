@@ -33,6 +33,7 @@ jobs:
       package-name: ipytoolbox
       package-index-name: TestPyPI
       package-index-url: https://test.pypi.org/legacy
+      password: ${{ secrets.TEST_PYPI_API_TOKEN }}
 
   release:
     if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
@@ -41,3 +42,4 @@ jobs:
       package-name: ipytoolbox
       package-index-name: PyPI
       package-index-url: https://pypi.org
+      password: ${{ secrets.PYPI_API_TOKEN }}
