@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ipytoolbox"
 authors = [{ name = "Carl Thomé", email = "carlthome@gmail.com" }]
-description = "TODO"
+description = "A collection of IPython magic commands and other utilities"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
