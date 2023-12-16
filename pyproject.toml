@@ -9,12 +9,12 @@ description = "A collection of IPython magic commands and other utilities"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { file = "LICENSE" }
-dependencies = ["ipython"]
+dependencies = ["ipython", "matplotlib"]
 dynamic = ["version"]
 
 [project.optional-dependencies]
 tests = ["pytest", "pytest-cov"]
-notebooks = ["ipykernel"]
+notebooks = ["jupyter"]
 
 [project.urls]
 Homepage = "https://github.com/carlthome/ipytoolbox"
