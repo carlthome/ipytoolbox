@@ -14,13 +14,14 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 tests = ["pytest", "pytest-cov"]
+notebooks = ["ipykernel"]
 
 [project.urls]
 Homepage = "https://github.com/carlthome/ipytoolbox"
 Bugs = "https://github.com/carlthome/ipytoolbox/issues"
 
 [tool.setuptools_scm]
-write_to = "ipytoolbox/version.py"
+write_to = "src/ipytoolbox/version.py"
 local_scheme = "no-local-version"
 
 [tool.black]

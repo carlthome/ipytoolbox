@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from IPython.core.magic import Magics, line_magic, magics_class
+from IPython.core.magic import Magics, line_magic, cell_magic, magics_class
 from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
 
 
@@ -24,3 +24,23 @@ class CustomMagics(Magics):
         # Set CUDA_VISIBLE_DEVICES to the list of devices.
         devices = ",".join(devices)
         os.environ["CUDA_VISIBLE_DEVICES"] = devices
+
+    @magic_arguments()
+    @argument("-n", "--num-frames", help="Number of frames to render.", type=int, default=1)
+    @cell_magic
+    def animate(self, line, cell):
+        import matplotlib.animation
+        import matplotlib.pyplot as plt
+
+        args = parse_argstring(self.animate, line)
+
+        plt.rcParams["animation.html"] = "jshtml"
+        plt.rcParams["figure.dpi"] = 150
+        plt.ioff()
+        fig, ax = plt.subplots()
+
+        def f(t):
+            plt.cla()
+            eval(cell)
+
+        matplotlib.animation.FuncAnimation(fig, f, frames=args.num)
