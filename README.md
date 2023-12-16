@@ -5,9 +5,16 @@ A collection of IPython magic commands and other utilities.
 ## Features
 
 ### `%autocuda`
+
 Automatically select the local CUDA device(s) with most free memory.
 
 <img width="673" alt="image" src="https://github.com/carlthome/ipytoolbox/assets/1595907/7634b369-1c68-4e69-a2fd-fc938c7a2261">
+
+### `%animate`
+
+Automatically capture `plt.plot(); plt.show()` calls and display them as an animation once the cell has finished executing.
+
+[Example notebook](./notebooks/demo.ipynb)
 
 ## Install
 

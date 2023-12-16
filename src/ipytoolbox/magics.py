@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-from IPython.core.magic import Magics, line_magic, cell_magic, magics_class
+from IPython.core.magic import Magics, cell_magic, line_magic, magics_class
 from IPython.core.magic_arguments import argument, magic_arguments, parse_argstring
 
 
@@ -25,22 +25,48 @@ class CustomMagics(Magics):
         devices = ",".join(devices)
         os.environ["CUDA_VISIBLE_DEVICES"] = devices
 
-    @magic_arguments()
-    @argument("-n", "--num-frames", help="Number of frames to render.", type=int, default=1)
     @cell_magic
     def animate(self, line, cell):
+        from matplotlib.lines import Line2D
         import matplotlib.animation
         import matplotlib.pyplot as plt
 
-        args = parse_argstring(self.animate, line)
-
         plt.rcParams["animation.html"] = "jshtml"
-        plt.rcParams["figure.dpi"] = 150
-        plt.ioff()
-        fig, ax = plt.subplots()
+        fig = plt.figure()
 
-        def f(t):
-            plt.cla()
-            eval(cell)
+        captured_data = []
 
-        matplotlib.animation.FuncAnimation(fig, f, frames=args.num)
+        def capture():
+            ax = plt.gca()
+            lines = ax.get_lines()
+            ax.cla()
+            data = lines[0].get_data()
+            captured_data.append(data)
+
+        show = plt.show
+        plt.show = capture
+        exec(cell, globals(), locals())
+        plt.show = show
+
+        ax = fig.gca()
+
+        def func(data) -> list[Line2D]:
+            lines = ax.get_lines()
+            lines[0].set_data(data)
+            return lines
+
+        def init_func() -> list[Line2D]:
+            lines = ax.plot([], [])
+            return lines
+
+        animation = matplotlib.animation.FuncAnimation(
+            fig=fig,
+            func=func,
+            init_func=init_func,
+            frames=captured_data,
+            blit=True,
+            interval=100,
+        )
+
+        plt.close()
+        return animation
