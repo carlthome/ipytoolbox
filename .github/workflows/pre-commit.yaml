@@ -11,11 +11,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   pre-commit:
     uses: carlthome/workflows/.github/workflows/pre-commit.yaml@main
     with:
       update: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }} 
       push: true
-    permissions:
-      contents: write
