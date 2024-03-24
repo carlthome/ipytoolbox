@@ -28,7 +28,7 @@ class CustomMagics(Magics):
             cmd = "nvidia-smi --query-gpu=index,memory.free --format=csv,nounits,noheader"
             lines = subprocess.check_output(cmd, shell=True).decode().splitlines()
 
-            # Filter out devices with less than 1 GB of free memory.
+            # Only consider devices with enough free memory.
             min_megabytes = args.min_memory * 1000
             lines = [line for line in lines if int(line.split(",")[1]) >= min_megabytes]
 
@@ -41,7 +41,7 @@ class CustomMagics(Magics):
             os.environ["CUDA_VISIBLE_DEVICES"] = devices
 
             # Retry (if waiting duration given).
-            if args.wait != -1:
+            if args.wait != -1 and not devices:
                 duration = args.wait
                 print(f"No devices available. Retrying in {duration} seconds.")
                 time.sleep(duration)
