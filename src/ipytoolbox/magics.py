@@ -10,11 +10,11 @@ from IPython.core.magic_arguments import argument, magic_arguments, parse_argstr
 class CustomMagics(Magics):
     @magic_arguments()
     @argument("-d", "--max-devices", help="Maximum number of devices to use.", type=int, default=1)
-    @argument("-m", "--min-memory", help="Minimum memory in GB to use a device.", type=int, default=8)
+    @argument("-m", "--min-memory", help="Minimum memory in GB to include a device.", type=int, default=8)
     @argument(
         "-w",
         "--wait",
-        help="Retry until devices are available. -1 to disable. Positive number is seconds between retries.",
+        help="Retry indefinitely until devices become available. Leave at -1 to disable. Positive number is seconds between retries.",
         type=int,
         default=-1,
     )
@@ -29,7 +29,8 @@ class CustomMagics(Magics):
             lines = subprocess.check_output(cmd, shell=True).decode().splitlines()
 
             # Filter out devices with less than 1 GB of free memory.
-            lines = [line for line in lines if int(line.split(",")[1]) >= args.min_memory]
+            min_megabytes = args.min_memory * 1000
+            lines = [line for line in lines if int(line.split(",")[1]) >= min_megabytes]
 
             # Sort lines by free memory, then take the first N devices.
             lines.sort(reverse=True, key=lambda line: int(line.split(",")[1]))
