@@ -40,9 +40,11 @@ class CustomMagics(Magics):
             devices = ",".join(devices)
             os.environ["CUDA_VISIBLE_DEVICES"] = devices
 
-            # Retry later if waiting.
-            if args.wait:
-                time.sleep(5)
+            # Retry (if waiting duration given).
+            if args.wait != -1:
+                duration = args.wait
+                print(f"No devices available. Retrying in {duration} seconds.")
+                time.sleep(duration)
                 continue
             else:
                 break
